@@ -94,7 +94,7 @@ public class SpinCADFrame extends JFrame {
 	 * 
 	 */
 
-	int buildNum = 1026;
+	int buildNum = 1027;
 	// Swing things
 	private JPanel contentPane;
 	//=====================s====================================================================
@@ -145,6 +145,7 @@ public class SpinCADFrame extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					SpinCADFrame dspFrame = new SpinCADFrame();
 					dspFrame.setVisible(true);
 				} catch (Exception e) {
@@ -171,17 +172,6 @@ public class SpinCADFrame extends JFrame {
 
 		panel.setBackground(SystemColor.inactiveCaption);
 
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-				} finally {
-				}
-			}
-		});
-
 		WindowListener exitListener = window();
 		addWindowListener(exitListener);
 
@@ -196,10 +186,10 @@ public class SpinCADFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-//		JScrollPane scrollPane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//		setPreferredSize(new Dimension(450, 1200));
+		JScrollPane scrollPane = new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		setPreferredSize(new Dimension(450, 1200));
 
-		contentPane.add(panel, BorderLayout.CENTER);
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		// =========================================================
 		// ======================= toolbars ========================
@@ -300,21 +290,12 @@ public class SpinCADFrame extends JFrame {
 					if (dialogResult == JOptionPane.NO_OPTION) {
 						// eeprom.patch[bankIndex].patchModel.newModel();
 						repaint();
+						return;
 					}
-					else {
-						SpinCADPatch p = f.fileOpenPatch();
-						if (p != null) {
-							eeprom.patch[bankIndex] = p;
-							eeprom.patch[bankIndex].patchModel.getIndexFB();
-							eeprom.patch[bankIndex].patchModel.presetIndexFB();
-							eeprom.patch[bankIndex].setChanged(false);						
-							eeprom.changed = true;
-							updateAll();
-							repaint();
-						}
-					}
-				} else {
-					eeprom.patch[bankIndex] = f.fileOpenPatch();
+				}
+				SpinCADPatch p = f.fileOpenPatch();
+				if (p != null) {
+					eeprom.patch[bankIndex] = p;
 					eeprom.patch[bankIndex].patchModel.getIndexFB();
 					eeprom.patch[bankIndex].patchModel.presetIndexFB();
 					eeprom.patch[bankIndex].setChanged(false);						
@@ -337,22 +318,15 @@ public class SpinCADFrame extends JFrame {
 					if (dialogResult == JOptionPane.NO_OPTION) {
 						//						eeprom.patch[bankIndex].patchModel.newModel();
 						repaint();
-					}
-					else {
-						SpinCADPatch p = f.fileOpenHex();
-						if (p != null) {
-							eeprom.patch[bankIndex] = p;
-							eeprom.changed = true;
-							updateAll();
-							repaint();
-						}
+						return;
 					}
 				} 
-				else {
-					eeprom.patch[bankIndex] = f.fileOpenHex();
+				SpinCADPatch p = f.fileOpenHex();
+				if (p != null) {
+					eeprom.patch[bankIndex] = p;
 					eeprom.changed = true;
 					updateAll();
-					repaint();					
+					repaint();
 				}
 			}
 		});
@@ -362,16 +336,13 @@ public class SpinCADFrame extends JFrame {
 		JMenuItem mntmSavePatch = new JMenuItem("Save Patch");
 		mntmSavePatch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				SpinCADFile f = new SpinCADFile();
 				if(eeprom.patch[bankIndex].patchFileName != "Untitled") {
-					SpinCADFile f = new SpinCADFile();
 					f.fileSavePatch(eeprom.patch[bankIndex]);
-					updateAll(false);
-
 				} else {
-					SpinCADFile f = new SpinCADFile();
 					f.fileSavePatchAs(eeprom.patch[bankIndex]);
-					updateAll(false);
 				}
+				updateAll(false);
 			}
 		});
 		mntmSavePatch.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
@@ -458,17 +429,10 @@ public class SpinCADFrame extends JFrame {
 					if (dialogResult == JOptionPane.NO_OPTION) {
 						return;
 					}
-					else {
-						SpinCADBank b = f.fileOpenBank();
-						if (b != null) {
-							eeprom = b;
-							updateAll(false);
-						}
-					}
 				}
-				else
-				{
-					eeprom = f.fileOpenBank();
+				SpinCADBank b = f.fileOpenBank();
+				if (b != null) {
+					eeprom = b;
 					updateAll(false);
 				}
 			}
