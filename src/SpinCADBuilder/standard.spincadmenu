@@ -8,10 +8,10 @@
 @menuitem "Phase Invert" Phase_Invert
 @menuitem "Crossfade" crossfade
 @menuitem "Crossfade 2" crossfade_2
-// @menuitem "Crossfade 3" crossfade_3
+@menuitem "Crossfade 3" crossfade_3
 @menuitem "Panner" panner
 @menuitem "2:1 Mixer" Mixer_2_to_1
-@menuitem "2:1 (x2) Mixer" Mixer2_1x2
+@menuitem "2:1 (x2) Mixer" Mixer_4_to_2
 @menuitem "3:1 Mixer" Mixer_3_to_1
 @menuitem "4:1 Mixer" Mixer_4_to_1
 
@@ -48,10 +48,11 @@
 @menuitem "6-Band EQ" SixBandEQ 
 
 @menu "Delay" 
-@menuitem "Single Delay" SingleDelay
-@menuitem "Coarse Delay" CoarseDelay 
-@menuitem "Triple-tap" TripleTap 
+// @menuitem "Single Delay" SingleDelay
+// @menuitem "Coarse Delay" CoarseDelay 
+@menuitem "ThreeTap" TripleTap 
 @menuitem "MN3011" MN3011a 
+@menuitem "Drum Delay" DrumDelay 
 @menuitem "6-Tap Stereo" sixtap 
 @menuitem "8-Tap" eighttap 
 @menuitem "Stutter" Stutter 
@@ -61,9 +62,11 @@
 @menuitem "Allpass" allpass 
 @menuitem "Chirp" Chirp 
 @menuitem "Small Reverb" MinReverb 
+@menuitem "Small Reverb 2" MinReverb2 
 @menuitem "Room Reverb" reverb_room 
 @menuitem "Hall Reverb" reverb_hall 
-// @menuitem "Plate Reverb" reverb_plate 
+//@menuitem "Plate Reverb" reverb_plate 
+//@menuitem "Reverb Plate Filters" reverb_plate_filters 
 // @menuitem "Gated Reverb" gated_verb 
 @menuitem "ROM Reverb 1" rom_rev1 
 @menuitem "ROM Reverb 2" rom_rev2 
@@ -72,7 +75,7 @@
 //@menuitem "Shimmer Reverb" shimmer_verb 
 
 @menu "Modulation"  
-@menuitem "LFO Chorus" Chorus 
+@menuitem "1-voice Chorus" Chorus 
 @menuitem "4-voice Chorus" ChorusQuad 
 @menuitem "LFO Flanger" Flanger 
 @menuitem "Servo Flanger" servo
@@ -85,7 +88,7 @@
 @menuitem "Pitch Shift Adjustable" Pitch_shift_test 
 // @menuitem "Pitch Up" PitchUp 
 // @menuitem "Pitch Up/Down J" PitchUpDownJ 
-@menuitem "Pitch Up/Down" pitchupdown 
+@menuitem "Octave Up/Down" pitchupdown 
 @menuitem "Glitch Shift Adjustable" Glitch_shift 
 //@menuitem "Pitch Four" pitch_four 
 @menuitem "Pitch Offset" pitchoffset 
@@ -106,7 +109,8 @@
 @menuitem "Pot 0" Pot0 
 @menuitem "Pot 1" Pot1 
 @menuitem "Pot 2" Pot2 
-@menuitem "Constant" Constant 
+
+@menuitem "Smoother" control_smoother
 @menuitem "Sin/Cos LFO" SinCosLFOA
 @menuitem "LFO Value" LFO_Value 
 @menuitem "Ramp LFO" RampLFO
@@ -117,24 +121,28 @@
 //@menuitem "4-Phase Sample/Hold" Sine_Sample_Hold
 //@menuitem "Pattern Gen" PatternGenerator
 @menuitem "Tremolizer" tremolizer
-@menuitem "Envelope" EnvelopeControl
-@menuitem "Envelope II" New_Envelope
+
 //@menuitem "Peak/Envelope" Peak_Envelope
 @menuitem "Invert" InvertControl
 @menuitem "Power" PowerControl
 @menuitem "Clip" ClipControl
+@menuitem "Slicer" Slicer
+@menuitem "Two Stage" Two_Stage
+@menuitem "Vee" Vee
+@menuitem "Envelope" EnvelopeControl
+@menuitem "Envelope II" New_Envelope
+@menuitem "Mixer 2:1" ControlMixer_2_to_1
+@menuitem "Mixer 3:1" ControlMixer_3_to_1
+//@menuitem "SmootherA" control_smootherA
+@menuitem "Tap Tempo" TapTempo
+
+@menu "Instructions"
+@menuitem "Scale/Offset" ScaleOffsetControl
 @menuitem "Maximum" maxx
 @menuitem "Multiply" Multiply
 @menuitem "Half Wave" Half_Wave
-@menuitem "Slicer" Slicer
-@menuitem "Two Stage" Two_Stage
-@menuitem "Root" Root
 @menuitem "Absolute Value" Absa
 @menuitem "Exp" Exp
 @menuitem "Log" Log
-@menuitem "Scale/Offset" ScaleOffsetControl
-@menuitem "Control Mixer 2:1" ControlMixer_2_to_1
-@menuitem "Control Mixer 3:1" ControlMixer_3_to_1
-//@menuitem "SmootherA" control_smootherA
-@menuitem "Smoother" control_smoother
-@menuitem "Tap Tempo" TapTempo
+@menuitem "Root" Root
+@menuitem "Constant" Constant 
